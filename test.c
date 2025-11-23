@@ -6,7 +6,7 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/23 19:24:49 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 04:48:06 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,42 @@ static void	display(int	*values, int argc)
 	printf("\n");
 }
 
+void	push_swap(t_stack *a, t_stack *b)
+{
+	unsigned int	bit;
+	int				i;
+	int				rotates_needed;
+
+	bit = 1;
+	i = 0;
+	while (bit != 0)
+	{
+		rotates_needed = a->size - 1;
+		while (i < a->size && a->values[i++] & bit)
+			rotates_needed--;
+		if (a->values[a->size - 1] & bit)
+		{
+			i++;
+			stack_r(a);
+		}
+		else
+			stack_p(a, b);
+		while (rotates_needed-- > 0)
+		{
+			if (a->values[a->size - 1] & bit)
+			{
+				i++;
+				stack_r(a);
+			}
+			else
+				stack_p(a, b);
+		}
+		while (b->size > 0)
+				stack_p(b, a);
+		bit *= 2;
+	}
+}
+
 int	main(int argc, char **args)
 {
 	t_stack	*a;
@@ -51,10 +87,6 @@ int	main(int argc, char **args)
 	stack_init(b, NULL, 0);
 
 	display(a->values, a->size);
-	stack_p(a, b);
+	push_swap(a, b);
 	display(a->values, a->size);
-	display(b->values, b->size);
-	stack_p(b, a);
-	display(a->values, a->size);
-	display(b->values, b->size);
 }
