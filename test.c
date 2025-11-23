@@ -6,7 +6,7 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/23 17:18:08 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/23 19:24:49 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,32 @@ static void	display(int	*values, int argc)
 	int	i;
 
 	i = 0;
-	while(i < argc)
+	while (i < argc)
 		printf("%d, ", values[i++]);
 	printf("\n");
 }
 
 int	main(int argc, char **args)
 {
-	t_stack	*stack;
+	t_stack	*a;
+	t_stack	*b;
 	int		*indexes;
 
 	args = &args[1];
 	argc--;
+
 	indexes = convert(args, argc);
-	stack = malloc(sizeof(t_stack));
-	stack_init(stack, indexes, argc);
-	
-	display(indexes, argc);
-	stack_s(stack);
-	display(indexes, argc);
-	stack_r(stack);
-	display(indexes, argc);
-	stack_rr(stack);
-	display(indexes, argc);
-	stack_rr(stack);
-	display(indexes, argc);
-	stack_rr(stack);
-	display(indexes, argc);
+
+	a = malloc(sizeof(t_stack));
+	b = malloc(sizeof(t_stack));
+	stack_init(a, indexes, argc);
+	stack_init(b, NULL, 0);
+
+	display(a->values, a->size);
+	stack_p(a, b);
+	display(a->values, a->size);
+	display(b->values, b->size);
+	stack_p(b, a);
+	display(a->values, a->size);
+	display(b->values, b->size);
 }

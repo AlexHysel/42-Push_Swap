@@ -6,7 +6,7 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:57:47 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/23 16:37:06 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/23 18:48:33 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	num_as_str_cmp(char *str1, char *str2)
 	return ((*str1 - *str2) * sign);
 }
 
-int		erase_max(char **nums)
+int	erase_max(char **nums)
 {
 	int		max_i;
 	int		i;
