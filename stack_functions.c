@@ -6,28 +6,23 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:48:23 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 12:19:04 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 15:32:47 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-void	stack_init(t_stack *stack, int *values, int size)
-{
-	stack->values = values;
-	stack->size = size;
-}
 
-void	stack_s(t_stack *stack, char *log)
+t_stack	*stack_create(int *values, int size)
 {
-	int	size;
-	int	*values;
+	t_stack	*stack;
 
-	size = stack->size;
-	values = stack->values;
-	if (values && size >= 2)
-		swap(&values[size - 1], &values[size - 2]);
-	printf("%s", log);
+	stack = malloc(sizeof(t_stack));
+	if (stack)
+	{
+		stack->values = values;
+		stack->size = size;
+	}
+	return (stack);
 }
 
 void	stack_r(t_stack *stack, char *log)
@@ -41,21 +36,7 @@ void	stack_r(t_stack *stack, char *log)
 	i = 1;
 	while (i < size)
 		swap(&values[0], &values[i++]);
-	printf("%s", log);
-}
-
-void	stack_rr(t_stack *stack, char *log)
-{
-	int	end_i;
-	int	*values;
-	int	i;
-
-	end_i = stack->size - 1;
-	values = stack->values;
-	i = end_i - 1;
-	while (i >= 0)
-		swap(&values[end_i], &values[i--]);
-	printf("%s", log);
+	printstr(log);
 }
 
 void	stack_p(t_stack *from, t_stack *to, char *log)
@@ -81,5 +62,5 @@ void	stack_p(t_stack *from, t_stack *to, char *log)
 	free(to->values);
 	to->values = new_t;
 	to->size++;
-	printf("%s", log);
+	printstr(log);
 }

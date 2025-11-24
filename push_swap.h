@@ -6,7 +6,7 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:32:42 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 12:19:15 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 15:33:26 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ typedef struct s_stack
 	int		size;
 }				t_stack;
 
+void	push_swap(t_stack *a, t_stack *b);
+
 //Stack
-void	stack_init(t_stack *stack, int *values, int size);
-void	stack_s(t_stack *stack, char *log);
+t_stack	*stack_create(int *values, int size);
 void	stack_r(t_stack *stack, char *log);
-void	stack_rr(t_stack *stack, char *log);
 void	stack_p(t_stack *from, t_stack *to, char *log);
 
 //Utils
