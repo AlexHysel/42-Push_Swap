@@ -6,7 +6,7 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 16:34:26 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 18:58:00 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static int	validate(char **args, int argc)
 	while (++i < argc)
 	{
 		k = -1;
+		if (args[i][0] == '-')
+			k++;
 		while (args[i][++k])
-			if ((args[i][k] < '0' || args[i][k] > '9') && args[i][k] != '-')
+			if (args[i][k] < '0' || args[i][k] > '9')
 				return (0);
 		j = i;
 		while (args[++j])
@@ -42,20 +44,14 @@ static int	*convert(char **nums, int argc)
 {
 	int	*indexes;
 	int	c;
-	int	i;
 
-	i = 0;
-	c = argc / 2;
+	c = argc;
 	if (!validate(nums, argc))
 		return (NULL);
 	indexes = malloc(sizeof(int) * argc);
 	if (indexes)
-	{
 		while (--argc >= 0)
 			indexes[erase_max(nums)] = argc;
-		while (++i < c)
-			swap(&indexes[i], &indexes[argc - i - 1]);
-	}
 	return (indexes);
 }
 
@@ -81,15 +77,17 @@ void	push_swap(t_stack *a, t_stack *b)
 	unsigned int	bit;
 	unsigned int	m_bit;
 	int				i;
+	int				size;
 
 	bit = 1;
 	m_bit = max_bit(a->values, a->size);
+	size = a->size;
 	while (bit <= m_bit)
 	{
-		i = a->size;
-		while (i-- > 0)
+		i = 0;
+		while (i++ < size)
 		{
-			if (a->values[a->size - 1] & bit)
+			if (a->values[0] & bit)
 				stack_r(a, "ra\n");
 			else
 				stack_p(a, b, "pb\n");
@@ -98,19 +96,6 @@ void	push_swap(t_stack *a, t_stack *b)
 			stack_p(b, a, "pa\n");
 		bit *= 2;
 	}
-}
-
-#include <stdio.h>
-#include <time.h>
-
-static void	display(int	*values, int argc)
-{
-	int	i;
-
-	i = 0;
-	while (i < argc)
-		printf("%d, ", values[i++]);
-	printf("\n");
 }
 
 int	main(int argc, char **args)
@@ -129,9 +114,7 @@ int	main(int argc, char **args)
 	}
 	a = stack_create(indexes, argc);
 	b = stack_create(NULL, 0);
-	display(a->values, a->size);
 	push_swap(a, b);
-	display(a->values, a->size);
 }
 /*
 int	main(int argc, char **args)
