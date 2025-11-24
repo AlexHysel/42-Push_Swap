@@ -6,11 +6,18 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:57:47 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/23 18:48:33 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 04:58:12 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <unistd.h>
+
+void	printstr(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
 
 void	swap(int *a, int *b)
 {
