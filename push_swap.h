@@ -6,7 +6,7 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:32:42 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 15:33:26 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 19:16:48 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ typedef struct s_stack
 	int		size;
 }				t_stack;
 
+//Push_Swap
 void	push_swap(t_stack *a, t_stack *b);
+int		validate_args(char **args, int argc);
+int		*convert_args(char **args, int argc);
+int		max_bit(int *nums, int len);
 
 //Stack
 t_stack	*stack_create(int *values, int size);

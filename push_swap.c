@@ -6,13 +6,13 @@
 /*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 18:58:00 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/24 19:17:10 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	validate(char **args, int argc)
+int	validate_args(char **args, int argc)
 {
 	int	i;
 	int	j;
@@ -40,13 +40,13 @@ static int	validate(char **args, int argc)
 	return (1);
 }
 
-static int	*convert(char **nums, int argc)
+int	*convert_args(char **nums, int argc)
 {
 	int	*indexes;
 	int	c;
 
 	c = argc;
-	if (!validate(nums, argc))
+	if (!validate_args(nums, argc))
 		return (NULL);
 	indexes = malloc(sizeof(int) * argc);
 	if (indexes)
@@ -55,7 +55,7 @@ static int	*convert(char **nums, int argc)
 	return (indexes);
 }
 
-static int	max_bit(int *nums, int len)
+int	max_bit(int *nums, int len)
 {
 	int				max;
 	unsigned int	bit;
@@ -97,44 +97,3 @@ void	push_swap(t_stack *a, t_stack *b)
 		bit *= 2;
 	}
 }
-
-int	main(int argc, char **args)
-{
-	t_stack	*a;
-	t_stack	*b;
-	int		*indexes;
-
-	args = &args[1];
-	argc--;
-	indexes = convert(args, argc);
-	if (!indexes)
-	{
-		printstr("Error\n");
-		return (-1);
-	}
-	a = stack_create(indexes, argc);
-	b = stack_create(NULL, 0);
-	push_swap(a, b);
-}
-/*
-int	main(int argc, char **args)
-{
-	srand(0);
-	int	num = 100;
-	if (argc > 1)
-		num = atoi(args[1]);
-	int	*indexes = malloc(sizeof(int) * num);
-	for (int i = 0; i < num; i++)
-		indexes[i] = -1;
-	for (int i = 0; i < num; i++)
-	{
-		int n = rand() % num;
-		if (indexes[n] == -1)
-			indexes[n] = i;
-		else
-			i--;
-	}
-	t_stack *a = stack_create(indexes, num);
-	t_stack *b = stack_create(NULL, 0);
-	push_swap(a, b);
-}*/
