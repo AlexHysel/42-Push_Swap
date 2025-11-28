@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   stack_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
+/*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:48:23 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 18:26:14 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/28 16:17:52 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "unistd.h"
+#include <stdlib.h>
+
+static void	swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
 t_stack	*stack_create(int *values, int size)
 {
@@ -36,7 +47,8 @@ void	stack_r(t_stack *stack, char *log)
 	i = size;
 	while (i > 0)
 		swap(&values[0], &values[--i]);
-	printstr(log);
+	while (*log)
+		write(1, log++, 1);
 }
 
 void	stack_p(t_stack *from, t_stack *to, char *log)
@@ -62,5 +74,6 @@ void	stack_p(t_stack *from, t_stack *to, char *log)
 	free(to->values);
 	to->values = new_t;
 	to->size++;
-	printstr(log);
+	while (*log)
+		write(1, log++, 1);
 }

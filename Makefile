@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+         #
+#    By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/24 19:01:24 by afomin            #+#    #+#              #
-#    Updated: 2025/11/24 19:02:06 by afomin           ###   ########.fr        #
+#    Updated: 2025/11/28 16:09:53 by afomin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 LIBC = ar -rcs
 RM = rm -f
 
-FILES = stack_functions.c utils.c push_swap.c
+FILES = stack_functions.c utils.c push_swap.c args_functions.c
 
 OBJS = $(FILES:.c=.o)
 

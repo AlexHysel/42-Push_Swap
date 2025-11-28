@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afomin <alexhysel@gmail.com>               +#+  +:+       +#+        */
+/*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:32:42 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/24 19:16:48 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/28 16:17:16 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
-# include <stdlib.h>
+# define BIT_32 16777216
 
 typedef struct s_stack
 {
@@ -23,18 +22,17 @@ typedef struct s_stack
 
 //Push_Swap
 void	push_swap(t_stack *a, t_stack *b);
-int		validate_args(char **args, int argc);
-int		*convert_args(char **args, int argc);
-int		max_bit(int *nums, int len);
 
 //Stack
 t_stack	*stack_create(int *values, int size);
 void	stack_r(t_stack *stack, char *log);
 void	stack_p(t_stack *from, t_stack *to, char *log);
 
+//Args
+int		*convert_args(char **args, int argc);
+
 //Utils
-void	printstr(char *str);
-void	swap(int *a, int *b);
-int		erase_max(char **nums);
+int		num_as_str_cmp(char *a, char *b);
+int		is_integer(char *num);
 
 #endif
