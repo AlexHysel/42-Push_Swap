@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:48:23 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 16:58:06 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 18:10:20 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	stack_rr(t_stack *stack, int display)
 	last_index = stack->size - 1;
 	values = stack->values;
 	i = -1;
-	while (++i > 0)
+	while (++i < last_index)
 		swap(&values[i], &values[last_index]);
 	if (display)
 		log_functions("rr", stack->id);

@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 17:33:05 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 18:05:17 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,22 @@ static int	is_sorted(t_stack *a, t_stack *b)
 }
 */
 
+static void sort_3(t_stack *a)
+{
+	int	max;
+
+	max = get_max(a);
+	if (max == 0)
+		stack_rotate(1, a);
+	else if (max == 1)
+		stack_rotate(-1, a);
+	if (a->values[0] > a->values[1])
+	{
+		swap(&a->values[0], &a->values[1]);
+		log_functions("s", 'a');
+	}
+}
+
 static void	print_stack(t_stack *a)
 {
 	int	i;
@@ -62,5 +78,7 @@ void	push_swap(t_stack *a, t_stack *b)
 {
 	print_stack(a);
 	stack_push(a->size - 3, a, b);
+	print_stack(a);
+	sort_3(a);
 	print_stack(a);
 }
