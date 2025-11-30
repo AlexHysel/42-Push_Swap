@@ -6,28 +6,66 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 15:24:47 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/28 16:18:46 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 17:01:51 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
 
-static int	erase_max(char **nums)
+static int	len(char *str)
 {
-	int		max_i;
-	int		i;
+	int	len;
 
-	max_i = 0;
-	i = 0;
-	while (nums[i])
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+static int	num_as_str_cmp(char *str1, char *str2)
+{
+	int		str1_len;
+	int		str2_len;
+	short	sign;
+
+	sign = 1;
+	if (str1[0] == '-' || str2[0] == '-')
 	{
-		if (num_as_str_cmp(nums[i], nums[max_i]) >= 0)
-			max_i = i;
-		i++;
+		if (str1[0] == '-' && str2[0] == '-')
+			sign = -1;
+		else
+			return (str1[0] - str2[0]);
 	}
-	nums[max_i] = "";
-	return (max_i);
+	str1_len = len(str1);
+	str2_len = len(str2);
+	if (str1_len != str2_len)
+		return ((str1_len - str2_len) * sign);
+	while (*str1 && *str1 == *str2)
+	{
+		str1++;
+		str2++;
+	}
+	return ((*str1 - *str2) * sign);
+}
+
+static int	is_integer(char *num)
+{
+	if (*num == '-')
+	{
+		if (num_as_str_cmp(num, "-2147483648") < 0)
+			return (0);
+		num++;
+	}
+	else if (num_as_str_cmp(num, "2147483647") > 0)
+		return (0);
+	while (*num)
+	{
+		if (*num < '0' || *num > '9')
+			return (0);
+		num++;
+	}
+	return (1);
 }
 
 static int	validate_args(char **args)
@@ -57,6 +95,6 @@ int	*convert_args(char **nums, int argc)
 	indexes = malloc(sizeof(int) * argc);
 	if (indexes)
 		while (--argc >= 0)
-			indexes[erase_max(nums)] = argc;
+			indexes[argc] = argc;
 	return (indexes);
 }

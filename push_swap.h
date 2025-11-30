@@ -6,33 +6,37 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:32:42 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/28 16:17:16 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 16:56:58 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# define BIT_32 16777216
 
 typedef struct s_stack
 {
 	int		*values;
 	int		size;
+	char	id;
 }				t_stack;
 
 //Push_Swap
 void	push_swap(t_stack *a, t_stack *b);
+t_stack	*stack_create(int *values, int size, char id);
 
 //Stack
-t_stack	*stack_create(int *values, int size);
-void	stack_r(t_stack *stack, char *log);
-void	stack_p(t_stack *from, t_stack *to, char *log);
+void	stacks_rotate(int repeat, t_stack *a, t_stack *b);
+void	stack_rotate(int repeat, t_stack *stack);
+void	stack_push(int repeat, t_stack *from, t_stack *to);
+int		distance_to_top(int size, int index);
+int		get_target(int num, t_stack *a);
+int		get_cost(int a_cost, int b_cost);
 
 //Args
 int		*convert_args(char **args, int argc);
 
 //Utils
-int		num_as_str_cmp(char *a, char *b);
-int		is_integer(char *num);
+void	swap(int *a, int *b);
+void	log_functions(char *func, char stack_id);
 
 #endif

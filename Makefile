@@ -6,37 +6,24 @@
 #    By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/24 19:01:24 by afomin            #+#    #+#              #
-#    Updated: 2025/11/28 16:09:53 by afomin           ###   ########.fr        #
+#    Updated: 2025/11/30 17:19:44 by afomin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap.a
+NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-LIBC = ar -rcs
 RM = rm -f
 
-FILES = stack_functions.c utils.c push_swap.c args_functions.c
-
-OBJS = $(FILES:.c=.o)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+FILES = stack_push.c stack_rotate.c stack_utils.c \
+		utils.c push_swap.c args_functions.c
 
 all: ${NAME}
 
-$(NAME): $(OBJS)
-	$(LIBC) $(NAME) $(OBJS)
+$(NAME): $(FILES)
+	$(CC) main.c $(FILES) -o $(NAME)
 	
-bonus: $(OBJS)
-	$(LIBC) $(NAME) $(OBJS)
+test: $(FILES)
+	$(CC) test.c $(FILES) -o $(NAME)
 
-clean:
-	$(RM) $(OBJS)
-
-fclean: clean
-	$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: clean fclean re all
+.PHONY: all test

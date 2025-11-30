@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 19:10:16 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 17:18:15 by afomin           ###   ########.fr       */
+/*   Created: 2025/11/28 16:06:51 by afomin            #+#    #+#             */
+/*   Updated: 2025/11/30 17:25:27 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <unistd.h>
 #include <stdlib.h>
-/*
+
 int	main(int argc, char **args)
 {
-	int	num;
-	int *indexers;
+	t_stack	*a;
+	t_stack	*b;
+	char	*err_msg;
+	int		*indexes;
 
-	srand(0);
-	num = 100;
-	if (argc > 1)
-		num = atoi(args[1]);
-	indexes = malloc(sizeof(int) * num);
-	for (int i = 0; i < num; i++)
-		indexes[i] = -1;
-	for (int i = 0; i < num; i++)
+	args = &args[1];
+	argc--;
+	indexes = convert_args(args, argc);
+	if (!indexes)
 	{
-		int n = rand() % num;
-		if (indexes[n] == -1)
-			indexes[n] = i;
-		else
-			i--;
+		err_msg = "Error\n";
+		while (*err_msg)
+		{
+			write(2, err_msg, 1);
+			err_msg++;
+		}
+		return (-1);
 	}
-	t_stack *a = stack_create(indexes, num);
-	t_stack *b = stack_create(NULL, 0);
+	a = stack_create(indexes, argc, 'a');
+	b = stack_create(NULL, 0, 'b');
 	push_swap(a, b);
-}*/
+	free(a->values);
+	free(a);
+	free(b->values);
+	free(b);
+}

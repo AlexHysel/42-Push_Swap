@@ -6,29 +6,28 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/28 16:22:29 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 17:18:58 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
 
-static int	max_bit(int *nums, int len)
+t_stack	*stack_create(int *values, int size, char id)
 {
-	int				max;
-	unsigned int	bit;
+	t_stack	*stack;
 
-	max = -1;
-	while (--len >= 0)
-		if (max < nums[len])
-			max = nums[len];
-	if (!max)
-		return (1);
-	bit = BIT_32;
-	while (!(max & bit))
-		bit /= 2;
-	return (bit);
+	stack = malloc(sizeof(t_stack));
+	if (stack)
+	{
+		stack->values = values;
+		stack->size = size;
+		stack->id = id;
+	}
+	return (stack);
 }
 
+/*
 static int	is_sorted(t_stack *a, t_stack *b)
 {
 	int	*values;
@@ -45,29 +44,8 @@ static int	is_sorted(t_stack *a, t_stack *b)
 			return (0);
 	return (1);
 }
-
+*/
 void	push_swap(t_stack *a, t_stack *b)
 {
-	unsigned int	bit;
-	unsigned int	m_bit;
-	int				i;
-	int				size;
-
-	bit = 1;
-	m_bit = max_bit(a->values, a->size);
-	size = a->size;
-	while (bit <= m_bit && !is_sorted(a, b))
-	{
-		i = 0;
-		while (i++ < size && !is_sorted(a, b))
-		{
-			if (a->values[0] & bit)
-				stack_r(a, "ra\n");
-			else
-				stack_p(a, b, "pb\n");
-		}
-		while (b->size > 0)
-			stack_p(b, a, "pa\n");
-		bit *= 2;
-	}
+	stack_push(a->size - 3, a, b);
 }
