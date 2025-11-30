@@ -1,4 +1,3 @@
 a.out
-push_swap.a
-*.o
-*.swp
+*.swp*
+push_swap

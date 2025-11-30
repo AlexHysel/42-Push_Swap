@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:32:42 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 16:56:58 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 17:36:28 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		*convert_args(char **args, int argc);
 //Utils
 void	swap(int *a, int *b);
 void	log_functions(char *func, char stack_id);
+int		len(char *str);
 
 #endif

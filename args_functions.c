@@ -6,22 +6,13 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 15:24:47 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 17:01:51 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 17:45:39 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
-
-static int	len(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
-}
+#include <limits.h>
 
 static int	num_as_str_cmp(char *str1, char *str2)
 {
@@ -47,6 +38,28 @@ static int	num_as_str_cmp(char *str1, char *str2)
 		str2++;
 	}
 	return ((*str1 - *str2) * sign);
+}
+
+static int	ft_atoi(char *str)
+{
+	int		result;
+	short	sign;
+
+	result = 0;
+	sign = 1;
+	if (!num_as_str_cmp(str, "-2147483648"))
+		return (INT_MIN);
+	if (*str == '-')
+	{
+		str++;
+		sign = -1;
+	}
+	while (*str)
+	{
+		result *= 10;
+		result += *str++ - '0';
+	}
+	return (sign * result);
 }
 
 static int	is_integer(char *num)
@@ -88,13 +101,13 @@ static int	validate_args(char **args)
 
 int	*convert_args(char **nums, int argc)
 {
-	int	*indexes;
+	int	*args;
 
 	if (!validate_args(nums))
 		return (NULL);
-	indexes = malloc(sizeof(int) * argc);
-	if (indexes)
-		while (--argc >= 0)
-			indexes[argc] = argc;
-	return (indexes);
+	args = malloc(sizeof(int) * argc);
+	if (args)
+		while (argc-- > 0)
+			args[argc] = ft_atoi(nums[argc]);
+	return (args);
 }

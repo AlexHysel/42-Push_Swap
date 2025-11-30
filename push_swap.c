@@ -6,12 +6,13 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 17:18:58 by afomin           ###   ########.fr       */
+/*   Updated: 2025/11/30 17:33:05 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 t_stack	*stack_create(int *values, int size, char id)
 {
@@ -45,7 +46,21 @@ static int	is_sorted(t_stack *a, t_stack *b)
 	return (1);
 }
 */
+
+static void	print_stack(t_stack *a)
+{
+	int	i;
+
+	i = 0;
+	printf("%c | ", a->id);
+	while (i < a->size)
+		printf("%d ", a->values[i++]);
+	printf("\n");
+}
+
 void	push_swap(t_stack *a, t_stack *b)
 {
+	print_stack(a);
 	stack_push(a->size - 3, a, b);
+	print_stack(a);
 }
