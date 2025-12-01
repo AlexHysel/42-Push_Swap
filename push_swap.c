@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/01 19:05:42 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/01 19:23:14 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	sort_3(t_stack *a)
 	}
 }
 
-static void	final_rotate(t_stack *a)
+void	final_rotate(t_stack *a)
 {
 	short	min_index;
 
@@ -60,8 +60,8 @@ void	push_swap(t_stack *a, t_stack *b)
 	sort_3(a);
 	while (b->size)
 	{
-		b_cost = get_cheapest(a, b, &a_cost);
-		if ((a_cost > 0 && b_cost > 0) || (a_cost < 0 && b_cost < 0))
+		get_cheapest(a, b, &a_cost, &b_cost);
+		if ((a_cost >= 0 && b_cost >= 0) || (a_cost < 0 && b_cost < 0))
 		{
 			if (a_cost >= b_cost)
 			{

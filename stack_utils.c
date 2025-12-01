@@ -45,24 +45,26 @@ int	get_cost(short a_cost, short b_cost)
 	return (b_cost + a_cost);
 }
 
-int	get_cheapest(t_stack *a, t_stack *b, short *a_cost)
+void	get_cheapest(t_stack *a, t_stack *b, short *a_cost, short *b_cost)
 {
-	short	b_cost;
+	short	a_;
+	short	b_;
 	short	b_steps;
 	short	a_steps;
 	char	flag;
 
-	b_steps = -1;
+	b_ = -1;
 	flag = 1;
-	while (++b_steps < b->size)
+	while (++b_ < b->size)
 	{
-		a_steps = target_index(b->values[b_steps], a);
-		if (flag || get_cost(a_steps, b_steps) < get_cost(*a_cost, b_cost))
+		a_ = target_index(b->values[b_], a);
+		a_steps = distance_to_top(a_, a->size);
+		b_steps = distance_to_top(b_, b->size);
+		if (flag || get_cost(a_steps, b_steps) < get_cost(*a_cost, *b_cost))
 		{
-			*a_cost = distance_to_top(a_steps, a->size);
-			b_cost = distance_to_top(b_steps, b->size);
+			*a_cost = a_steps;
+			*b_cost = b_steps;
 			flag = 0;
 		}
 	}
-	return (b_cost);
 }

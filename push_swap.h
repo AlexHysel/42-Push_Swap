@@ -31,7 +31,7 @@ void	stack_push(int repeat, t_stack *from, t_stack *to);
 int		distance_to_top(int size, int index);
 int		target_index(int num, t_stack *a);
 int		get_cost(short a_cost, short b_cost);
-int		get_cheapest(t_stack *a, t_stack *b, short *a_cost);
+void		get_cheapest(t_stack *a, t_stack *b, short *a_cost, short *b_cost);
 
 //Args
 int		*convert_args(char **args, int argc);
