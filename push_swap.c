@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 18:05:17 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/01 18:07:14 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,7 @@ t_stack	*stack_create(int *values, int size, char id)
 	return (stack);
 }
 
-/*
-static int	is_sorted(t_stack *a, t_stack *b)
-{
-	int	*values;
-	int	i;
-
-	if (b->size)
-		return (0);
-	values = a->values;
-	if (!values)
-		return (0);
-	i = 0;
-	while (++i < a->size)
-		if (values[i - 1] > values[i])
-			return (0);
-	return (1);
-}
-*/
-
-static void sort_3(t_stack *a)
+static void	sort_3(t_stack *a)
 {
 	int	max;
 
@@ -59,26 +40,47 @@ static void sort_3(t_stack *a)
 	if (a->values[0] > a->values[1])
 	{
 		swap(&a->values[0], &a->values[1]);
-		log_functions("s", 'a');
+		log_functions("s", a->id);
 	}
 }
 
-static void	print_stack(t_stack *a)
+void	final_rotate(t_stack *a)
 {
-	int	i;
+	short	min_index;
 
-	i = 0;
-	printf("%c | ", a->id);
-	while (i < a->size)
-		printf("%d ", a->values[i++]);
-	printf("\n");
+	min_index = get_min(a);
+	stack_rotate(distance_to_top(min_index, a->size), a);
 }
 
 void	push_swap(t_stack *a, t_stack *b)
 {
-	print_stack(a);
+	short	a_cost;
+	short	b_cost;
+	short	min_index;
+
 	stack_push(a->size - 3, a, b);
-	print_stack(a);
 	sort_3(a);
-	print_stack(a);
+	while (b->size)
+	{
+		b_cost = get_cheapest(a, b, &a_cost);
+		if ((a_cost > 0 && b_cost > 0) || (a_cost < 0 && b_cost < 0))
+		{
+			if (a_cost >= b_cost)
+			{
+				a_cost -= b_cost;
+				stacks_rotate(b_cost, a, b);
+				b_cost = 0;
+			}
+			else if (b_cost > a_cost)
+			{
+				b_cost -= a_cost;
+				stacks_rotate(a_cost, a, b);
+				a_cost = 0;
+			}
+		}
+		stack_rotate(a_cost, a);
+		stack_rotate(b_cost, b);
+		stack_push(1, b, a);
+	}
+	final_rotate(a);
 }
