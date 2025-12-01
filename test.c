@@ -6,35 +6,69 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 19:10:16 by afomin            #+#    #+#             */
-/*   Updated: 2025/11/30 17:18:15 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/01 19:03:04 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
 #include "push_swap.h"
+#include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-/*
-int	main(int argc, char **args)
-{
-	int	num;
-	int *indexers;
+#include <stdio.h>
+#include <time.h>
 
-	srand(0);
-	num = 100;
-	if (argc > 1)
-		num = atoi(args[1]);
-	indexes = malloc(sizeof(int) * num);
-	for (int i = 0; i < num; i++)
-		indexes[i] = -1;
-	for (int i = 0; i < num; i++)
+static char	contains(int *nums, int size, int num)
+{
+	while (size-- > 0)
+		if (nums[size] == num)
+			return (1);
+	return (0);
+}
+
+static void	fill(int **values, int len)
+{
+	time_t	t;
+
+	t = time(NULL);
+	srand(localtime(&t)->tm_sec);
+	*values = malloc(sizeof(int) * len);
+	for (int i = 0; i < len; i++)
 	{
-		int n = rand() % num;
-		if (indexes[n] == -1)
-			indexes[n] = i;
+		int n = rand() % 1000;
+		if (!contains(*values, i, n))
+			(*values)[i] = n;
 		else
 			i--;
 	}
-	t_stack *a = stack_create(indexes, num);
-	t_stack *b = stack_create(NULL, 0);
+}
+
+static void	arg_log(int *nums, int size)
+{
+	int	i;
+	int	fd;
+
+	fd = open("trace.txt", O_WRONLY);
+	ftruncate(fd, 0);
+	i = 0;
+	while (i < size)
+		dprintf(fd, "%d ", nums[i++]);
+	close(fd);
+}
+
+int			main(int argc, char **args)
+{
+	int	len = 100;
+	int *values;
+
+	if (argc > 1)
+		len = atoi(args[1]);
+	fill(&values, len);
+	arg_log(values, len);
+	t_stack *a = stack_create(values, len, 'a');
+	t_stack *b = stack_create(NULL, 0, 'b');
 	push_swap(a, b);
+	free(a->values);
+	free(a);
+	free(b->values);
+	free(b);
 }*/

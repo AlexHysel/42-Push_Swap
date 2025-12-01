@@ -6,38 +6,12 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:37:40 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/01 17:32:49 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/01 19:03:40 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-
-int	get_max(t_stack *stack)
-{
-	int	max;
-	int	i;
-
-	max = 0;
-	i = 0;
-	while (++i < stack->size)
-		if (stack->values[i] > stack->values[max])
-			max = i;
-	return (max);
-}
-
-int	get_min(t_stack *stack)
-{
-	int	min;
-	int	i;
-
-	min = 0;
-	i = 0;
-	while (++i < stack->size)
-		if (stack->values[i] < stack->values[min])
-			min = i;
-	return (min);
-}
 
 int	distance_to_top(int index, int size)
 {
@@ -76,9 +50,10 @@ int	get_cheapest(t_stack *a, t_stack *b, short *a_cost)
 	short	b_cost;
 	short	b_steps;
 	short	a_steps;
-	char	flag = 1;
+	char	flag;
 
 	b_steps = -1;
+	flag = 1;
 	while (++b_steps < b->size)
 	{
 		a_steps = target_index(b->values[b_steps], a);

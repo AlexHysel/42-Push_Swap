@@ -6,11 +6,12 @@
 #    By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/24 19:01:24 by afomin            #+#    #+#              #
-#    Updated: 2025/11/30 17:19:44 by afomin           ###   ########.fr        #
+#    Updated: 2025/12/01 19:02:02 by afomin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+TEST_NAME = push_swap_test
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
@@ -24,6 +25,16 @@ $(NAME): $(FILES)
 	$(CC) main.c $(FILES) -o $(NAME)
 	
 test: $(FILES)
-	$(CC) test.c $(FILES) -o $(NAME)
+	$(CC) test.c $(FILES) -o $(TEST_NAME)
 
-.PHONY: all test
+clean:
+	$(RM) $(NAME)
+	$(RM) $(TEST_NAME)
+
+fclean:
+	$(RM) $(NAME)
+	$(RM) $(TEST_NAME)
+
+re: clean all
+
+.PHONY: all test clean fclean re

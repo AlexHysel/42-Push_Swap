@@ -6,13 +6,12 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/01 18:07:14 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/01 19:05:42 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 t_stack	*stack_create(int *values, int size, char id)
 {
@@ -44,7 +43,7 @@ static void	sort_3(t_stack *a)
 	}
 }
 
-void	final_rotate(t_stack *a)
+static void	final_rotate(t_stack *a)
 {
 	short	min_index;
 
@@ -56,7 +55,6 @@ void	push_swap(t_stack *a, t_stack *b)
 {
 	short	a_cost;
 	short	b_cost;
-	short	min_index;
 
 	stack_push(a->size - 3, a, b);
 	sort_3(a);
