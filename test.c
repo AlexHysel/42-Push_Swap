@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 19:10:16 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/02 13:16:41 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/02 14:34:36 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -25,18 +25,17 @@ static char	contains(int *nums, int size, int num)
 	return (0);
 }
 
-static void	fill(int **values, int len)
+static void	fill(int *values, int len)
 {
 	time_t	t;
 
 	t = time(NULL);
 	srand(localtime(&t)->tm_sec);
-	*values = malloc(sizeof(int) * len);
 	for (int i = 0; i < len; i++)
 	{
 		int n = rand() % 1000;
-		if (!contains(*values, i, n))
-			(*values)[i] = n;
+		if (!contains(values, i, n))
+			(values)[i] = n;
 		else
 			i--;
 	}
@@ -47,8 +46,7 @@ static void	arg_log(int *nums, int size)
 	int	i;
 	int	fd;
 
-	fd = open("trace.txt", O_WRONLY);
-	ftruncate(fd, 0);
+	fd = open("trace.txt", O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	i = 0;
 	while (i < size)
 		dprintf(fd, "%d ", nums[i++]);
@@ -62,7 +60,8 @@ int			main(int argc, char **args)
 
 	if (argc > 1)
 		len = atoi(args[1]);
-	fill(&values, len);
+	values = malloc(sizeof(int) * len);
+	fill(values, len);
 	arg_log(values, len);
 	t_stack *a = stack_create(values, len, 'a');
 	t_stack *b = stack_create(NULL, 0, 'b');
