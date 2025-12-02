@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/01 19:23:14 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/02 12:56:58 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	sort_3(t_stack *a)
 	}
 }
 
-void	final_rotate(t_stack *a)
+static void	final_rotate(t_stack *a)
 {
 	short	min_index;
 
@@ -51,31 +51,42 @@ void	final_rotate(t_stack *a)
 	stack_rotate(distance_to_top(min_index, a->size), a);
 }
 
+static short	get_diff(short *a_cost, short *b_cost)
+{
+	short	diff;
+
+	diff = 0;
+	if ((*a_cost > 0 && *b_cost > 0) || (*a_cost < 0 && *b_cost < 0))
+	{
+		if (*a_cost > *b_cost)
+		{
+			*a_cost -= *b_cost;
+			diff = *a_cost;
+			*b_cost = 0;
+		}
+		else
+		{
+			*b_cost -= *a_cost;
+			diff = *b_cost;
+			*a_cost = 0;
+		}
+	}
+	return (diff);
+}
+
 void	push_swap(t_stack *a, t_stack *b)
 {
 	short	a_cost;
 	short	b_cost;
+	short	diff;
 
 	stack_push(a->size - 3, a, b);
 	sort_3(a);
 	while (b->size)
 	{
 		get_cheapest(a, b, &a_cost, &b_cost);
-		if ((a_cost >= 0 && b_cost >= 0) || (a_cost < 0 && b_cost < 0))
-		{
-			if (a_cost >= b_cost)
-			{
-				a_cost -= b_cost;
-				stacks_rotate(b_cost, a, b);
-				b_cost = 0;
-			}
-			else if (b_cost > a_cost)
-			{
-				b_cost -= a_cost;
-				stacks_rotate(a_cost, a, b);
-				a_cost = 0;
-			}
-		}
+		diff = get_diff(&a_cost, &b_cost);
+		stacks_rotate(diff, a, b);
 		stack_rotate(a_cost, a);
 		stack_rotate(b_cost, b);
 		stack_push(1, b, a);

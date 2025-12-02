@@ -6,10 +6,10 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 19:10:16 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/01 19:18:47 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/02 12:58:59 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
 #include "push_swap.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -71,4 +71,4 @@ int			main(int argc, char **args)
 	free(a);
 	free(b->values);
 	free(b);
-}
+}*/
