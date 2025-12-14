@@ -6,7 +6,7 @@
 #    By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/24 19:01:24 by afomin            #+#    #+#              #
-#    Updated: 2025/12/01 19:02:02 by afomin           ###   ########.fr        #
+#    Updated: 2025/12/14 18:59:01 by afomin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ FILES = stack_push.c stack_rotate.c stack_utils.c \
 all: ${NAME}
 
 $(NAME): $(FILES)
-	$(CC) main.c $(FILES) -o $(NAME)
+	$(CC) main.c ft_split.c $(FILES) -o $(NAME)
 	
 test: $(FILES)
 	$(CC) test.c $(FILES) -o $(TEST_NAME)
