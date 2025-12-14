@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:11:14 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/02 13:24:40 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/14 13:07:06 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	push_swap(t_stack *a, t_stack *b)
 	short	b_cost;
 	short	common;
 
-	if (a->size > 2)
+	if (a->size > 2 && !is_sorted(a->values, a->size))
 	{
 		stack_push(a->size - 3, a, b);
 		sort_3(a);

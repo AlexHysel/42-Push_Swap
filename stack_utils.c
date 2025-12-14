@@ -6,12 +6,20 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:37:40 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/01 19:03:40 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/14 13:05:57 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+
+char	is_sorted(int *nums, int size)
+{
+	while (size-- > 0)
+		if (nums[size] < nums[size - 1])
+			return (0);
+	return (1);
+}
 
 int	distance_to_top(int index, int size)
 {
