@@ -6,7 +6,7 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:32:42 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/14 13:06:26 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/14 13:16:57 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_stack	*stack_create(int *values, int size, char id);
 void	stacks_rotate(int repeat, t_stack *a, t_stack *b);
 void	stack_rotate(int repeat, t_stack *stack);
 void	stack_push(int repeat, t_stack *from, t_stack *to);
-char	is_sorted(int *nums, int size);
+char	is_sorted(t_stack *a);
 int		distance_to_top(int size, int index);
 int		target_index(int num, t_stack *a);
 int		get_cost(short a_cost, short b_cost);

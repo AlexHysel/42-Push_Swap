@@ -6,17 +6,27 @@
 /*   By: afomin afomin@student.42kl.edu.my          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 15:37:40 by afomin            #+#    #+#             */
-/*   Updated: 2025/12/14 13:05:57 by afomin           ###   ########.fr       */
+/*   Updated: 2025/12/14 13:24:34 by afomin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-char	is_sorted(int *nums, int size)
+char	is_sorted(t_stack *a)
 {
-	while (size-- > 0)
-		if (nums[size] < nums[size - 1])
+	int	max;
+	int	i;
+
+	max = get_max(a);
+	i = max + 1;
+	while (--i > 0)
+		if (a->values[i] < a->values[i - 1])
+			return (0);
+	if (a->values[0] < a->values[a->size - 1])
+		return (0);
+	i = a->size;
+	while (--i > max + 1)
+		if (a->values[i] < a->values[i - 1])
 			return (0);
 	return (1);
 }
